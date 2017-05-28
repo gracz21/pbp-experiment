@@ -1,0 +1,8 @@
+german.csv		https://archive.ics.uci.edu/ml/datasets/Statlog+%28German+Credit+Data%29
+anneal.csv		https://archive.ics.uci.edu/ml/datasets/Annealing
+crx.csv			https://archive.ics.uci.edu/ml/datasets/Credit+Approval
+australian.csv	https://archive.ics.uci.edu/ml/datasets/Statlog+%28Australian+Credit+Approval%29
+bands.csv		https://archive.ics.uci.edu/ml/datasets/Cylinder+Bands
+arrhythmia.csv	https://archive.ics.uci.edu/ml/datasets/Arrhythmia
+horse-colic.csv	https://archive.ics.uci.edu/ml/datasets/Horse+Colic
+dermatology.csv	https://archive.ics.uci.edu/ml/datasets/Dermatology
