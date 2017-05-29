@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
-from time import time
+from memory_profiler import memory_usage
 from sklearn.metrics import accuracy_score, f1_score
+from time import time
 
 
 class Classifier(ABC):
@@ -14,8 +15,22 @@ class Classifier(ABC):
     def tuning(self):
         pass
 
-    @abstractmethod
     def learn(self):
+        for idx, _ in enumerate(self._classifiers):
+            mem_before = memory_usage(-1, interval=1, timeout=1)
+            start_learn_time = time()
+            mem_during = memory_usage(self.learn_single(idx))
+            end_learn_time = time()
+            mem_after = memory_usage(-1, interval=1, timeout=1)
+
+            learn_time = end_learn_time - start_learn_time
+            peak_memory = max(mem_during) - max(mem_before)
+            memory = max(mem_after) - max(mem_before)
+
+            self.results.append({'learn_time': learn_time, 'peak_memory': peak_memory, 'memory': memory})
+
+    @abstractmethod
+    def learn_single(self, idx):
         pass
 
     def predict(self):
