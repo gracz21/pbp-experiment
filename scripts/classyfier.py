@@ -23,13 +23,15 @@ class Classifier(ABC):
 
             mem_before = memory_usage(-1, interval=1, timeout=1)
             start_learn_time = time()
-            clf.fit(x, y)
+            mem_during = memory_usage((clf.fit, (x, y)))
             end_learn_time = time()
             mem_after = memory_usage(-1, interval=1, timeout=1)
 
             learn_time = end_learn_time - start_learn_time
+            peak_memory = max(mem_during) - max(mem_before)
+            memory = max(mem_after) - max(mem_before)
 
-            self.results.append({'learn_time': learn_time})
+            self.results.append({'learn_time': learn_time, 'peak_memory': peak_memory, 'memory': memory})
 
     def predict(self):
         for idx, clf in enumerate(self._classifiers):
@@ -38,11 +40,11 @@ class Classifier(ABC):
             end_predict_time = time()
 
             accuracy = accuracy_score(self.data_list[idx]['test'][:, -1], prediction)
-            
+
             if self.data_list[idx]['classes'] == 2:
                 f_score = f1_score(self.data_list[idx]['test'][:, -1], prediction)
             else:
-                f_score = -1
+                f_score = f1_score(self.data_list[idx]['test'][:, -1], prediction, average="macro")
 
             predict_time = end_predict_time - start_predict_time
 

@@ -14,7 +14,7 @@ def read_all_data():
         matrix = df.as_matrix()
         features = []
         for i in range(0, matrix.shape[1]):
-            column = matrix[:,i]
+            column = matrix[:, i]
             if any(isinstance(x, str) for x in column):
                 column[pd.isnull(column)] = 'NaN'
             label_encoder = LabelEncoder()
