@@ -8,6 +8,7 @@ class Classifier(ABC):
     def __init__(self, data_list):
         self.data_list = data_list
         self._classifiers = []
+        self._params = {}
         self.results = []
 
     @abstractmethod
@@ -15,20 +16,20 @@ class Classifier(ABC):
         pass
 
     def learn(self):
-        for idx, _ in enumerate(self._classifiers):
+        for idx, clf in enumerate(self._classifiers):
+            clf.set_params(**self._params)
+            x = self.data_list[idx]['train'][:, :-1]
+            y = self.data_list[idx]['train'][:, -1]
+
             mem_before = memory_usage(-1, interval=1, timeout=1)
             start_learn_time = time()
-            self.learn_single(idx)
+            clf.fit(x, y)
             end_learn_time = time()
             mem_after = memory_usage(-1, interval=1, timeout=1)
 
             learn_time = end_learn_time - start_learn_time
 
             self.results.append({'learn_time': learn_time})
-
-    @abstractmethod
-    def learn_single(self, idx):
-        pass
 
     def predict(self):
         for idx, clf in enumerate(self._classifiers):

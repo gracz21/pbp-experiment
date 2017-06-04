@@ -11,8 +11,3 @@ class DecisionTree(Classifier):
 
     def tuning(self):
         pass
-
-    def learn_single(self, idx):
-        X = self.data_list[idx]['train'][:, :-1]
-        Y = self.data_list[idx]['train'][:, -1]
-        self._classifiers[idx].fit(X, Y)

@@ -24,5 +24,5 @@ def read_all_data():
         encoded = encoded.transpose()
         train, valid, test = np.split(encoded, [round(len(encoded) * 2 / 3), round(len(encoded) * 5 / 6)])
         classes = set(encoded[:, -1])
-        data_list.append({'train': train, 'valid': valid, 'test': test, 'classes':len(classes), 'file': file})
+        data_list.append({'train': train, 'valid': valid, 'test': test, 'classes': len(classes), 'file': file})
     return data_list
