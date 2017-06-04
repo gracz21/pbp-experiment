@@ -10,7 +10,9 @@ class RandomForest(Classifier):
             self._classifiers.append(clf)
 
     def learn_single(self, idx):
-        self._classifiers[idx].fit(self.data_list[idx]['train'].iloc[:, :-1], self.data_list[idx]['train'].iloc[:, -1])
+        X = self.data_list[idx]['train'][:, :-1]
+        Y = self.data_list[idx]['train'][:, -1]
+        self._classifiers[idx].fit(X, Y)
 
     def tuning(self):
         pass

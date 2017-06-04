@@ -18,4 +18,5 @@ def experiment():
     return results
 
 if __name__ == '__main__':
-    experiment()
+    results = experiment()
+    print('finished')
