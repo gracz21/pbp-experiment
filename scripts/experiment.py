@@ -2,6 +2,8 @@ from scripts.read_data import read_all_data
 from scripts.decision_tree import DecisionTree
 from scripts.random_forest import RandomForest
 from scripts.gradient_tree_boosting import GradientTreeBoosting
+import json
+from time import gmtime, strftime
 
 
 def experiment():
@@ -10,7 +12,8 @@ def experiment():
 
     results = []
     for classifier in classifiers_groups:
-        classifier.tuning()
+        classifier.create_classifiers()
+        print(classifier.tuning())
         classifier.learn()
         classifier.predict()
         results.append(classifier.results)
@@ -19,4 +22,5 @@ def experiment():
 
 if __name__ == '__main__':
     results = experiment()
-    print('finished')
+    with open('./results/' + strftime("%Y-%m-%d_%H-%M-%S", gmtime()) + '.json', 'w') as f:
+        json.dump(results, f, sort_keys=True, indent=4, separators=(',', ': '))
