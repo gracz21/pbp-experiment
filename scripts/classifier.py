@@ -52,12 +52,12 @@ class Classifier(ABC):
         for idx, clf in enumerate(self.classifiers):
             self.set_params(clf, params)
 
-            x = self.data_list[idx]['train'][:, :-1]
-            y = self.data_list[idx]['train'][:, -1]
+            x = self.data_list[idx]['train'].iloc[:, :-1]
+            y = self.data_list[idx]['train'].iloc[:, -1]
             clf.fit(x, y)
 
-            prediction = clf.predict(self.data_list[idx]['valid'][:, :-1])
-            accuracy_list.append(mean_absolute_error(self.data_list[idx]['valid'][:, -1], prediction))
+            prediction = clf.predict(self.data_list[idx]['valid'].iloc[:, :-1])
+            accuracy_list.append(mean_absolute_error(self.data_list[idx]['valid'].iloc[:, -1], prediction))
 
         return -np.mean(accuracy_list)
 
@@ -75,8 +75,8 @@ class Classifier(ABC):
         params = self.load_params()
         for idx, clf in enumerate(self.classifiers):
             clf.set_params(**params)
-            x = self.data_list[idx]['train'][:, :-1]
-            y = self.data_list[idx]['train'][:, -1]
+            x = self.data_list[idx]['train'].iloc[:, :-1]
+            y = self.data_list[idx]['train'].iloc[:, -1]
 
             mem_before = memory_usage(-1, interval=1, timeout=1)
             start_learn_time = time()
@@ -94,15 +94,15 @@ class Classifier(ABC):
     def predict(self):
         for idx, clf in enumerate(self.classifiers):
             start_predict_time = time()
-            prediction = clf.predict(self.data_list[idx]['test'][:, :-1])
+            prediction = clf.predict(self.data_list[idx]['test'].iloc[:, :-1])
             end_predict_time = time()
 
-            accuracy = accuracy_score(self.data_list[idx]['test'][:, -1], prediction)
+            accuracy = accuracy_score(self.data_list[idx]['test'].iloc[:, -1], prediction)
 
             if self.data_list[idx]['classes'] == 2:
-                f_score = f1_score(self.data_list[idx]['test'][:, -1], prediction)
+                f_score = f1_score(self.data_list[idx]['test'].iloc[:, -1], prediction)
             else:
-                f_score = f1_score(self.data_list[idx]['test'][:, -1], prediction, average="macro")
+                f_score = f1_score(self.data_list[idx]['test'].iloc[:, -1], prediction, average="macro")
 
             predict_time = end_predict_time - start_predict_time
 

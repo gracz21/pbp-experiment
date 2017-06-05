@@ -11,7 +11,7 @@ class RandomForest(Classifier):
                                 (2, 20),
                                 (1, 300),
                                 (5, 20)], 
-                    'n_calls': 10}
+                    'n_calls': 100}
 
 
     def get_classifier(self):

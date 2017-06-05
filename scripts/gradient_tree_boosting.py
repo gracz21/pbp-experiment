@@ -12,7 +12,7 @@ class GradientTreeBoosting(Classifier):
                                 (1, 300),
                                 (5, 200),
                                 (0.05, 0.2)], 
-                    'n_calls': 10}
+                    'n_calls': 100}
 
 
     def get_classifier(self):

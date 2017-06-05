@@ -10,19 +10,8 @@ def read_all_data():
     filenames = glob.glob(os.path.join(path, "*.csv"))
     data_list = []
     for file in filenames:
-        df = pd.read_csv(file, sep=';', header=None, na_values='?', dtype='float32')
-        matrix = df.as_matrix()
-        features = []
-        for i in range(0, matrix.shape[1]):
-            column = matrix[:, i]
-            if any(isinstance(x, str) for x in column):
-                column[pd.isnull(column)] = 'NaN'
-            label_encoder = LabelEncoder()
-            feature = label_encoder.fit_transform(column)
-            features.append(feature)
-        encoded = np.array(features)
-        encoded = encoded.transpose()
-        train, valid, test = np.split(encoded, [round(len(encoded) * 2 / 3), round(len(encoded) * 5 / 6)])
-        classes = set(encoded[:, -1])
+        df = pd.read_csv(file, sep=';', header=None, na_values='?')
+        classes = set(df.as_matrix()[:, -1])
+        train, valid, test = np.split(df, [round(len(df) * 2 / 3), round(len(df) * 5 / 6)])
         data_list.append({'train': train, 'valid': valid, 'test': test, 'classes': len(classes), 'file': file})
     return data_list
