@@ -11,7 +11,10 @@ def read_all_data():
     data_list = []
     for file in filenames:
         df = pd.read_csv(file, sep=';', header=None, na_values='?')
-        classes = set(df.as_matrix()[:, -1])
+        label_encoder = LabelEncoder()
+        feature = label_encoder.fit_transform(df.iloc[:, -1])
+        df[df.shape[1] - 1] = feature
+        classes = len(set(df.iloc[:, -1]))
         train, valid, test = np.split(df, [round(len(df) * 2 / 3), round(len(df) * 5 / 6)])
-        data_list.append({'train': train, 'valid': valid, 'test': test, 'classes': len(classes), 'file': file})
+        data_list.append({'train': train, 'valid': valid, 'test': test, 'classes': classes, 'file': file})
     return data_list
