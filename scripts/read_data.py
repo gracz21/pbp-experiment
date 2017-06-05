@@ -10,7 +10,7 @@ def read_all_data():
     filenames = glob.glob(os.path.join(path, "*.csv"))
     data_list = []
     for file in filenames:
-        df = pd.read_csv(file, sep=';', header=None, na_values='?')
+        df = pd.read_csv(file, sep=';', header=None, na_values='?', dtype='float32')
         matrix = df.as_matrix()
         features = []
         for i in range(0, matrix.shape[1]):
