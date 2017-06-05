@@ -10,7 +10,7 @@ def experiment():
 
     results = []
     for classifier in classifiers_groups:
-        classifier.tuning()
+        #classifier.tuning()
         classifier.learn()
         classifier.predict()
         results.append(classifier.results)
