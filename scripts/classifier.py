@@ -56,11 +56,11 @@ class Classifier(ABC):
         return np.mean(accuracy_list)
 
     def load_params(self):
-        with open('./params/' + self.name) as f:
+        with open('./params/' + self.name + '.json') as f:
             return json.load(f)
 
     def save_params(self, params):
-        with open('./params/' + self.name, 'w') as f:
+        with open('./params/' + self.name + '.json', 'w') as f:
             json.dump(params, f, sort_keys=False, indent=4, separators=(',', ': '))
 
     def learn(self):
@@ -80,8 +80,8 @@ class Classifier(ABC):
             peak_memory = max(mem_during) - max(mem_before)
             memory = max(mem_after) - max(mem_before)
 
-            self.results.append({'name': self.name, 'learn_time': learn_time, 'peak_memory': peak_memory,
-                                 'memory': memory, 'file': self.data_list[idx]['file']})
+            self.results.append({'learn_time': learn_time, 'peak_memory': peak_memory, 'memory': memory,
+                                 'file': self.data_list[idx]['file']})
 
     def predict(self):
         for idx, clf in enumerate(self.classifiers):
