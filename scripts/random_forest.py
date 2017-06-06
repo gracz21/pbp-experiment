@@ -18,7 +18,8 @@ class RandomForest(Classifier):
     def set_params(self, clf, params):
         max_depth, min_samples_split, min_samples_leaf, n_estimators = params
 
-        clf.set_params(max_depth=max_depth,
+        clf.set_params(max_features='sqrt',
+                       max_depth=max_depth,
                        min_samples_split=min_samples_split,
                        min_samples_leaf=min_samples_leaf,
                        n_estimators=n_estimators)
