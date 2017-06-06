@@ -14,7 +14,7 @@ def experiment():
     results = {}
     for classifier in classifiers_groups:
         classifier.create_classifiers()
-        #print(classifier.tuning())
+        print(classifier.tuning())
         classifier.learn()
         classifier.predict()
         results[classifier.name] = classifier.results
