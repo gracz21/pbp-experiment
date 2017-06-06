@@ -6,38 +6,33 @@ import json
 from skopt import gp_minimize
 import numpy as np
 
+
 class Classifier(ABC):
     @property
     def name(self):
         raise NotImplementedError
 
-
     @property
     def tuning_params(self):
         raise NotImplementedError
-
 
     @abstractmethod
     def set_params(self, clf, params):
         raise NotImplementedError
 
-
     @abstractmethod
     def get_classifier(self):
         raise NotImplementedError
-
 
     def __init__(self, data_list):
         self.data_list = data_list
         self.classifiers = []
         self.results = []
 
-
     def create_classifiers(self):
         for _ in self.data_list:
             clf = self.get_classifier()
             self.classifiers.append(clf)
-
 
     def tuning(self):
         res_gp = gp_minimize(self.objective, self.tuning_params['space'], 
@@ -45,7 +40,6 @@ class Classifier(ABC):
         params = self.params_to_json(res_gp.x)
         self.save_params(params)
         return res_gp.fun
-
 
     def objective(self, params):
         accuracy_list = list()
@@ -61,7 +55,6 @@ class Classifier(ABC):
 
         return -np.mean(accuracy_list)
 
-
     def load_params(self):
         with open('./params/' + self.name) as f:
             return json.load(f)
@@ -69,7 +62,6 @@ class Classifier(ABC):
     def save_params(self, params):
         with open('./params/' + self.name + '.json', 'w') as f:
             json.dump(params, f, sort_keys=False, indent=4, separators=(',', ': '))
-
 
     def learn(self):
         params = self.load_params()
@@ -89,7 +81,6 @@ class Classifier(ABC):
             memory = max(mem_after) - max(mem_before)
 
             self.results.append({'name': self.name, 'learn_time': learn_time, 'peak_memory': peak_memory, 'memory': memory})
-
 
     def predict(self):
         for idx, clf in enumerate(self.classifiers):
