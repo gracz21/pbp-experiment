@@ -1,9 +1,7 @@
 Name	Link	Instances	Atributes	Cite
-BreastTissue	http://archive.ics.uci.edu/ml/datasets/Breast+Tissue	106	10	None
-CNAE-9	http://archive.ics.uci.edu/ml/datasets/CNAE-9	1080	857	None
-glass	http://archive.ics.uci.edu/ml/datasets/Glass+Identification	214	10	None
 Hill-Valley	http://archive.ics.uci.edu/ml/datasets/Hill-Valley	606	101	None
 ionosphere	http://archive.ics.uci.edu/ml/datasets/Ionosphere	351	34	None
-leaf	http://archive.ics.uci.edu/ml/datasets/Leaf	340	15	'Evaluation of Features for Leaf Discrimination', Pedro F.B. Silva, Andre R.S. Marcal, Rubim M. Almeida da Silva (2013). Springer Lecture Notes in Computer Science, Vol. 7950, 197-204.
 pop_failures http://archive.ics.uci.edu/ml/datasets/Climate+Model+Simulation+Crashes	540	19	Please cite our final revised paper in Geoscientific Model Development.
-sonar	http://archive.ics.uci.edu/ml/datasets/Connectionist+Bench+%28Sonar%2C+Mines+vs.+Rocks%29	208	61	None
+CGT	http://archive.ics.uci.edu/ml/datasets/Cardiotocography	2126	22	None
+creditcard	https://www.kaggle.com/dalpozz/creditcardfraud	284807	28	Andrea Dal Pozzolo, Olivier Caelen, Reid A. Johnson and Gianluca Bontempi. Calibrating Probability with Undersampling for Unbalanced Classification. In Symposium on Computational Intelligence and Data Mining (CIDM), IEEE, 2015
+optdigits	http://archive.ics.uci.edu/ml/datasets/Optical+Recognition+of+Handwritten+Digits	5620	65	None
